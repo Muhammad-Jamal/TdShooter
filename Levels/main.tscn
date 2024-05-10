@@ -1,3 +1,41 @@
-[gd_scene format=3 uid="uid://dli5f5wub67g8"]
+[gd_scene load_steps=6 format=3 uid="uid://dli5f5wub67g8"]
+
+[ext_resource type="PackedScene" uid="uid://c7c8pqxigykcf" path="res://CharacterScenes/player.tscn" id="1_kfk0a"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_j8pn3"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_41dxq"]
+sky_material = SubResource("ProceduralSkyMaterial_j8pn3")
+
+[sub_resource type="Environment" id="Environment_prv5q"]
+background_mode = 2
+sky = SubResource("Sky_41dxq")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mci0"]
+albedo_color = Color(0.568627, 0.568627, 0.568627, 1)
 
 [node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.47567, -0.761776, 0.439812, 2.78059e-08, 0.5, 0.866025, -0.879624, -0.411943, 0.237835, 0, 0, 0)
+light_color = Color(0.886275, 0.85098, 0.709804, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_prv5q")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(15, 1, 15)
+material = SubResource("StandardMaterial3D_4mci0")
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_kfk0a")]
+camera = NodePath("../Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.579011, 0.81532, 0, -0.81532, 0.579011, 0, 6.82226, 5.88015)
