@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcxp4rbqohbp1"]
+
+[ext_resource type="PackedScene" uid="uid://obow0fsfnfxp" path="res://assets/weapon/Pistol.gltf" id="1_skk2m"]
+[ext_resource type="Script" path="res://assets/pistol_2.gd" id="2_fkiyc"]
+
+[node name="Pistol2" node_paths=PackedStringArray("barrelExit") instance=ExtResource("1_skk2m")]
+script = ExtResource("2_fkiyc")
+barrelExit = NodePath("BarrelExit")
+
+[node name="Pistol" parent="." index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="BarrelExit" type="Node3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00150415, 0.1482, -0.499914)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="BarrelExit" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.569802)
+light_color = Color(1, 1, 0.521569, 1)
+light_energy = 0.0
+omni_range = 4.0
+
+[node name="Timer" type="Timer" parent="BarrelExit/OmniLight3D" index="0"]
+wait_time = 0.05
+one_shot = true
+
+[connection signal="timeout" from="BarrelExit/OmniLight3D/Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://gm384uiqhjo8"]
+
+[ext_resource type="Script" path="res://Bullet.gd" id="1_wlvjx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0cbm4"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 0.172549, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bcx6o"]
+material = SubResource("StandardMaterial3D_0cbm4")
+top_radius = 0.05
+bottom_radius = 0.2
+height = 0.3
+
+[node name="Bullet" type="Node3D"]
+top_level = true
+script = ExtResource("1_wlvjx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_bcx6o")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

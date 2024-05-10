@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export var camera:Camera3D 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+@export var weapon:Node3D
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -19,7 +20,8 @@ func _physics_process(delta):
 	var rayCastResult := space_state.intersect_ray(query)
 	
 	if(not rayCastResult.is_empty()):
-		print(rayCastResult.collider)
+		look_at(Vector3(rayCastResult.position.x,position.y,rayCastResult.position.z))
+		weapon.look_at(Vector3(rayCastResult.position.x, rayCastResult.position.y,rayCastResult.position.z))
 		
 
 	

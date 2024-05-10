@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7c8pqxigykcf"]
+[gd_scene load_steps=8 format=3 uid="uid://c7c8pqxigykcf"]
 
 [ext_resource type="Script" path="res://CharacterScenes/player.gd" id="1_2ov1h"]
+[ext_resource type="PackedScene" uid="uid://bcxp4rbqohbp1" path="res://assets/pistol_2.tscn" id="2_c7mtj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e4gte"]
 albedo_color = Color(0.780392, 0, 0, 1)
@@ -16,10 +17,12 @@ radius = 0.1
 height = 0.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iwed6"]
+height = 1.4
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("weapon")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_2ov1h")
+weapon = NodePath("Pistol2")
 
 [node name="Body" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_h32mb")
@@ -31,3 +34,6 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_iwed6")
+
+[node name="Pistol2" parent="." instance=ExtResource("2_c7mtj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.476745, 0.262437, -0.640999)
