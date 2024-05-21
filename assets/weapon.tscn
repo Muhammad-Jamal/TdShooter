@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3vk3mrxrxb8f"]
+
+[ext_resource type="Script" path="res://assets/Weapon.gd" id="1_rowvs"]
+
+[node name="Weapon" type="Node3D" node_paths=PackedStringArray("barrelExit")]
+script = ExtResource("1_rowvs")
+barrelExit = NodePath("BarrelExit")
+
+[node name="BarrelExit" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00150415, 0.1482, -0.499914)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BarrelExit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.45953)
+visible = false
+size = Vector3(0.1, 0.1, 1)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="BarrelExit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.569802)
+light_color = Color(1, 1, 0.521569, 1)
+light_energy = 0.0
+shadow_enabled = true
+omni_range = 8.0
+omni_attenuation = 2.0
+
+[node name="Timer" type="Timer" parent="BarrelExit/OmniLight3D"]
+wait_time = 0.05
+one_shot = true
+
+[connection signal="timeout" from="BarrelExit/OmniLight3D/Timer" to="." method="_on_timer_timeout"]

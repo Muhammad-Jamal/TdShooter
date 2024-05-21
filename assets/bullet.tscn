@@ -2,17 +2,17 @@
 
 [ext_resource type="Script" path="res://Bullet.gd" id="1_wlvjx"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0cbm4"]
-albedo_color = Color(1, 0, 0, 1)
-emission_enabled = true
-emission = Color(1, 1, 0.172549, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m7jdt"]
+albedo_color = Color(0.921569, 0.921569, 0.921569, 1)
+emission = Color(0.858824, 0.858824, 0.564706, 1)
 emission_energy_multiplier = 10.0
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_bcx6o"]
-material = SubResource("StandardMaterial3D_0cbm4")
-top_radius = 0.05
-bottom_radius = 0.2
-height = 0.3
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mdtae"]
+material = SubResource("StandardMaterial3D_m7jdt")
+radius = 0.05
+height = 0.1
+radial_segments = 6
+rings = 6
 
 [node name="Bullet" type="Node3D"]
 top_level = true
@@ -20,7 +20,7 @@ script = ExtResource("1_wlvjx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CylinderMesh_bcx6o")
+mesh = SubResource("CapsuleMesh_mdtae")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

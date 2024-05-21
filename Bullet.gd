@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var SPEED := 10
+@export var SPEED := 30
 @onready var timer = $Timer
 
 # Called when the node enters the scene tree for the first time.

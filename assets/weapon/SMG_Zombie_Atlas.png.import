@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctsaekyrfaf70"
-path.s3tc="res://.godot/imported/Logo.png-3f727bc575b71196031e5024c4a29f71.s3tc.ctex"
+uid="uid://berqlaaggxsc1"
+path.s3tc="res://.godot/imported/SMG_Zombie_Atlas.png-547ac9a59b69b49d7bc10fdef1344cd7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://Logo.png"
-dest_files=["res://.godot/imported/Logo.png-3f727bc575b71196031e5024c4a29f71.s3tc.ctex"]
+source_file="res://assets/weapon/SMG_Zombie_Atlas.png"
+dest_files=["res://.godot/imported/SMG_Zombie_Atlas.png-547ac9a59b69b49d7bc10fdef1344cd7.s3tc.ctex"]
 
 [params]
 

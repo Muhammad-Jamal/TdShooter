@@ -1,13 +1,11 @@
 extends Node3D
+class_name Weapon
+
 
 @export var bullet = preload("res://assets/bullet.tscn")
 @export var barrelExit:Node3D
 @onready var muzzleFlashLight = $BarrelExit/OmniLight3D
 @onready var timer = $BarrelExit/OmniLight3D/Timer
-
-func _input(event):
-	if(event.is_action_pressed("shootAction")):
-		shoot()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,14 +14,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
+	if(Input.is_action_just_pressed("shootAction")):
+		shoot()
+	
 
 func shoot():
 	var instance:Node3D = bullet.instantiate()
-	instance.transform = barrelExit.transform
 	barrelExit.add_child(instance)
-	muzzleFlashLight.light_energy = 1;
+	muzzleFlashLight.light_energy = 5;
 	timer.start()
 
 

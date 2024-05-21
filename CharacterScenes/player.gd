@@ -1,45 +1,31 @@
 extends CharacterBody3D
+class_name	Player
 
-@export var camera:Camera3D 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-@export var weapon:Node3D
+var inputVector :Vector2
+var playerFaceDirect := Vector3.FORWARD
+var theta:float = 0
+const GRAVITY := 9.8
 
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+@export var playerMoveSpeed := 5
+@export var playerJumpHeight := 2
+@export var weapon :Weapon
 
 
 func _physics_process(delta):
+	MovePlayer()
+	RotatePlayer(delta)
 	
-	var mousePosInWorldSpace := camera.project_ray_origin( get_viewport().get_mouse_position() )
-	var normalToMousePosInWorldSpace :=  camera.project_ray_normal(get_viewport().get_mouse_position()) * 100
-	var space_state = get_world_3d().direct_space_state
-	var query = PhysicsRayQueryParameters3D.create(camera.global_position,normalToMousePosInWorldSpace)
-	query.collide_with_areas = true
-	var rayCastResult := space_state.intersect_ray(query)
+func RotatePlayer(delta):
+	if(inputVector == Vector2.ZERO):
+		return
+	theta = atan2(-inputVector.x, -inputVector.y)
+	print(theta)
+	rotation.y = lerp_angle(rotation.y, theta, delta * 10)
 	
-	if(not rayCastResult.is_empty()):
-		look_at(Vector3(rayCastResult.position.x,position.y,rayCastResult.position.z))
-		weapon.look_at(Vector3(rayCastResult.position.x, rayCastResult.position.y,rayCastResult.position.z))
-		
-
-	
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("jumpAction") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	var input_dir = Input.get_vector("moveLeft", "moveRight", "moveForward", "moveBack")
-	var direction = (camera.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	move_and_slide()
+func MovePlayer():
+	inputVector = Input.get_vector("moveLeft","moveRight","moveForward","moveBack")
+	velocity.z = inputVector.y * playerMoveSpeed
+	velocity.x = inputVector.x * playerMoveSpeed
+	if (not is_on_floor()):
+		velocity.y = -GRAVITY
+	move_and_slide()	

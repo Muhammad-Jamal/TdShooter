@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://hlh58lfrj6fj"]
+
+[ext_resource type="PackedScene" uid="uid://b3vk3mrxrxb8f" path="res://assets/weapon.tscn" id="1_jrd33"]
+[ext_resource type="PackedScene" uid="uid://b46fc8sdnaf5r" path="res://assets/weapon/SMG.gltf" id="2_cjxvn"]
+
+[node name="Weapon" instance=ExtResource("1_jrd33")]
+
+[node name="SMG" parent="." index="0" instance=ExtResource("2_cjxvn")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="BarrelExit" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00150415, 0.202979, -0.71793)
